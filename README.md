@@ -5,3 +5,5 @@ This handler can use to send access token of API in WSO2 API Manager as a query 
 Compatible with : API Manager 1.9.0
 
 Tutorial : http://blog.tharindu.org/2015/08/how-to-write-custom-handler-to-use.html
+
+Tutorial : http://tharindu-tech.blogspot.com/2015/08/how-to-write-custom-handler-to-use.html
