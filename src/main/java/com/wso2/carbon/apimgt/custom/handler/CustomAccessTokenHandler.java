@@ -42,7 +42,15 @@ public class CustomAccessTokenHandler extends AbstractHandler implements Managed
 		Map headers =
 				(Map) axis2MC.getProperty(org.apache.axis2.context.MessageContext.TRANSPORT_HEADERS);
 		if (headers != null) {
-			headers.put("Authorization", "Bearer " + accessToken);
+			//Below if condition will put the "Authorization" header only if it is not present in headers. After this
+			//fix, we will be able to send the token in either header or query parameter. This is how we support the
+			//below request format.
+			//curl -H "Authorization :Bearer <token>" http://localhost:8280/test/1 -k
+			if (!headers.containsKey("Authorization")) {
+				//The below code will support the request where access token is sent via the query parameter
+				//Eg : curl http://localhost:8280/test/1?access-token=<token> -k
+				headers.put("Authorization", "Bearer " + accessToken);
+			}
 
 		} else {
 			headers = new HashMap<String, String>();
